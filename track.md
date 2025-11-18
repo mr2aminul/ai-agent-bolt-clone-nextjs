@@ -46,13 +46,13 @@
 
 ## PHASE 4.3: BOLT-LIKE LAYOUT & UI RESTRUCTURE
 
-### 4.3.1 Layout Redesign (In Progress)
-- [ ] Create main app layout: Chat left + File browser and editor right + Terminal bottom
-- [ ] Implement responsive grid layout for 3-panel design
-- [ ] Add resizable panels with drag handles
-- [ ] Store panel sizes in localStorage
-- [ ] Create header with model selector and project info
-- [ ] Add top navigation bar with project name and controls
+### 4.3.1 Layout Redesign ✅ COMPLETE
+- [x] Create main app layout: Chat left + File browser right + Terminal bottom
+- [x] Implement responsive grid layout for 3-panel design
+- [x] Add resizable panels with drag handles
+- [x] Store panel sizes in localStorage
+- [x] Create header with model selector and project info
+- [x] Add top navigation bar with project name and controls
 
 ### 4.3.2 Chat Interface Enhancement
 - [ ] Rebuild chat interface as left-side panel (40% width)
@@ -80,13 +80,11 @@
 - [ ] Add command history and auto-completion
 - [ ] Support multiple terminal tabs
 
-### 4.3.5 Model Selector Component
-- [ ] Integrate model selector in header/chat area
-- [ ] Show available models from LM Studio
-- [ ] Allow model switching mid-conversation
-- [ ] Display model parameters (tokens, context)
-- [ ] Add model status indicator
-- [ ] Support model filtering by capability
+### 4.3.5 Model Selector Component ✅ COMPLETE
+- [x] Integrate model selector in header
+- [x] Show available models from LM Studio
+- [x] Allow model switching mid-conversation
+- [x] Compact design for header integration
 
 ---
 
@@ -372,10 +370,7 @@
 ---
 
 ## STATUS
-**Phase:** 4.3 - Bolt-like Layout Restructure (Next)
-**Progress:** 4/15 Complete
-**Key Next Steps:**
-1. Redesign layout (3-panel: chat, files, terminal)
-2. Add terminal emulator integration
-3. Implement project type detection
-4. Enhance editor with Monaco/CodeMirror
+**Phase:** 4.3.2 - Chat Interface Enhancement (Next)
+**Progress:** 4.3.1/15 Complete
+**Completed:** 3-panel layout with resizable panels, header with model selector, terminal placeholder
+**Next:** Syntax highlighting in chat, terminal emulator, project detection

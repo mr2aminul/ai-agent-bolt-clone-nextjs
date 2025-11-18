@@ -50,10 +50,9 @@ export default function ModelSelector({ selectedModel, onModelChange }: ModelSel
 
   if (loading) {
     return (
-      <div className="w-full p-4 border border-gray-700 rounded-lg bg-gray-800">
+      <div className="w-full">
         <div className="animate-pulse">
-          <div className="h-4 bg-gray-700 rounded w-1/4 mb-2"></div>
-          <div className="h-10 bg-gray-700 rounded"></div>
+          <div className="h-8 bg-gray-800 rounded"></div>
         </div>
       </div>
     );
@@ -61,61 +60,38 @@ export default function ModelSelector({ selectedModel, onModelChange }: ModelSel
 
   if (error) {
     return (
-      <div className="w-full p-4 border border-red-500 rounded-lg bg-red-900/20">
-        <p className="text-red-400 text-sm mb-2">{error}</p>
-        <button
-          onClick={fetchModels}
-          className="px-3 py-1 text-sm bg-red-600 hover:bg-red-700 rounded transition-colors"
-        >
-          Retry
-        </button>
+      <div className="w-full">
+        <select className="w-full px-3 py-1.5 text-sm bg-red-900/20 border border-red-700 rounded text-red-400">
+          <option>Error loading models</option>
+        </select>
       </div>
     );
   }
 
   if (models.length === 0) {
     return (
-      <div className="w-full p-4 border border-yellow-500 rounded-lg bg-yellow-900/20">
-        <p className="text-yellow-400 text-sm">
-          No models found. Please download models in LM Studio.
-        </p>
+      <div className="w-full">
+        <select className="w-full px-3 py-1.5 text-sm bg-gray-800 border border-gray-700 rounded text-gray-400">
+          <option>No models available</option>
+        </select>
       </div>
     );
   }
 
   return (
     <div className="w-full">
-      <label className="block text-sm font-medium mb-2 text-gray-300">
-        Select Model
-      </label>
       <select
         value={selectedModel || ''}
         onChange={(e) => onModelChange(e.target.value)}
-        className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+        className="w-full px-3 py-1.5 text-sm bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 text-white"
       >
+        <option value="">Select Model...</option>
         {models.map((model) => (
           <option key={model.path} value={model.path}>
-            {model.path} ({formatSize(model.size)})
+            {model.path}
           </option>
         ))}
       </select>
-
-      {selectedModel && (
-        <div className="mt-2 p-3 bg-gray-800/50 rounded-lg text-sm">
-          {models.find(m => m.path === selectedModel) && (
-            <div className="space-y-1 text-gray-400">
-              <p><span className="font-medium">Type:</span> {models.find(m => m.path === selectedModel)?.type}</p>
-              {models.find(m => m.path === selectedModel)?.architecture && (
-                <p><span className="font-medium">Architecture:</span> {models.find(m => m.path === selectedModel)?.architecture}</p>
-              )}
-              <p>
-                <span className="font-medium">Capabilities:</span>{' '}
-                {models.find(m => m.path === selectedModel)?.capabilities?.join(', ')}
-              </p>
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 }
