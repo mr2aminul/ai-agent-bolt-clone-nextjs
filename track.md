@@ -1,20 +1,34 @@
 # AI Project Builder - Bolt.new Clone
 
 ## COMPLETED ✅
-- **Phase 1-6**: Foundation, DB, LM Studio, UI, File Ops, Editor (All Complete)
+- **Phase 1-6**: Foundation, DB, LM Studio, UI, File Ops, Editor
 - **Phase 7.1**: DuckDuckGo search with caching
+- **Phase 7.2.1**: Language parsers installed
 
 ---
 
-## PHASE 7: INTELLIGENT CODE UNDERSTANDING (CRITICAL)
+## PHASE 7: INTELLIGENT CODE UNDERSTANDING
 
 ### 7.2 Code Parser & AST Analysis
-- [ ] Install language parsers (@babel/parser, php-parser, python-ast)
-- [ ] Build AST parser service for JS/TS/PHP/Python
+#### 7.2.1 Install Parsers
+- [x] @babel/parser, @babel/traverse for JS/TS
+- [x] php-parser for PHP
+
+#### 7.2.2 Build Parser Service
+- [ ] Create lib/code-parser/ directory
+- [ ] JS/TS parser class
+- [ ] PHP parser class
+
+#### 7.2.3 Extract Code Structure
 - [ ] Extract functions, classes, imports, exports
-- [ ] Identify function boundaries and dependencies
-- [ ] Store code structure in DB (functions table)
-- [ ] API: POST /api/code/analyze - Parse file and extract structure
+- [ ] Identify function boundaries
+
+#### 7.2.4 DB Storage
+- [ ] Migration: code_entities table
+- [ ] Store parsed data
+
+#### 7.2.5 API Endpoint
+- [ ] POST /api/code/analyze
 
 ### 7.3 Cross-File Dependency Tracking
 - [ ] Build import/export graph
@@ -227,20 +241,6 @@ User: "Add birthday field to user profile"
 ---
 
 ## CURRENT STATUS
-**Phase:** 7.2 - Code Parser & AST Analysis (NEXT - CRITICAL)
-**Priority:** Must build intelligent code understanding before system is useful
-**Goal:** System should understand code structure, not just manipulate text
-
-**Why This Matters:**
-- Current system only does find/replace - not safe for real projects
-- Need AST parsing to edit functions without breaking code
-- Must track dependencies to find all affected files
-- Database awareness required for full-stack changes
-- Planning phase prevents mistakes and incomplete updates
-
-**Next Steps:**
-1. Install language parsers
-2. Build AST analysis service
-3. Create dependency tracker
-4. Implement smart code editing
-5. Add database schema detection
+**Phase:** 7.2.2 - Build Parser Service (NEXT)
+**Completed:** 7.2.1 - Parsers installed
+**Next:** Create parser service classes for JS/TS/PHP
