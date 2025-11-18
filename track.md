@@ -96,10 +96,13 @@
 - [x] API endpoint for detection
 - [x] Auto-detect on project creation
 
-### 5.1.2 PHP & Python Detection
-- [ ] Detect PHP (Laravel, WordPress, custom)
-- [ ] Detect Python frameworks
-- [ ] Store framework versions
+### 5.1.2 PHP & Python Detection ✅ COMPLETE
+- [x] Detect PHP (Laravel, WordPress, Symfony, CakePHP, CodeIgniter)
+- [x] Detect Python frameworks (Django, Flask, FastAPI)
+- [x] Store framework versions from composer.json/requirements.txt
+- [x] Parse Pipfile and pyproject.toml for Python
+- [x] Detect PHP features (Composer, PHPUnit, Doctrine, Guzzle)
+- [x] Detect Python features (pytest, SQLAlchemy, Celery)
 
 ### 5.2 Runtime Configuration
 - [ ] Setup Node.js environment detection
@@ -373,7 +376,7 @@
 ---
 
 ## STATUS
-**Phase:** 5.1.2 - PHP & Python Detection (Next)
-**Progress:** 5.1.1 Complete
-**Completed:** Node.js/React/Next.js detection with auto-detect on project creation
-**Next:** PHP & Python framework detection
+**Phase:** 5.2 - Runtime Configuration (Next)
+**Progress:** 5.1.2 Complete
+**Completed:** PHP & Python detection with Laravel, WordPress, Django, Flask, FastAPI
+**Next:** Setup environment detection for Node.js, PHP, Python
