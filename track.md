@@ -1,382 +1,246 @@
-# AI Project Builder - Development Tracker (Bolt Clone)
+# AI Project Builder - Bolt.new Clone
 
-## PHASE 1: FOUNDATION & DATABASE ✅ COMPLETE
-
-### 1.1-1.4 All Complete
-- Next.js 14 + TypeScript configured
-- 11 Supabase tables with RLS
-- Database access layer with full CRUD
-- Type definitions and error handling
+## COMPLETED ✅
+- **Phase 1-6**: Foundation, DB, LM Studio, UI, File Ops, Editor (All Complete)
+- **Phase 7.1**: DuckDuckGo search with caching
 
 ---
 
-## PHASE 2: LM STUDIO SDK INTEGRATION ✅ COMPLETE
+## PHASE 7: INTELLIGENT CODE UNDERSTANDING (CRITICAL)
 
-### 2.1-2.4 All Complete
-- LM Studio client wrapper with health checks
-- Model listing and selection API
-- Streaming chat with SSE support
-- Context management with token optimization
-- System prompts for different agent types
+### 7.2 Code Parser & AST Analysis
+- [ ] Install language parsers (@babel/parser, php-parser, python-ast)
+- [ ] Build AST parser service for JS/TS/PHP/Python
+- [ ] Extract functions, classes, imports, exports
+- [ ] Identify function boundaries and dependencies
+- [ ] Store code structure in DB (functions table)
+- [ ] API: POST /api/code/analyze - Parse file and extract structure
 
----
+### 7.3 Cross-File Dependency Tracking
+- [ ] Build import/export graph
+- [ ] Track function calls across files
+- [ ] Identify database schema references in code
+- [ ] Create dependency map (which files affect which)
+- [ ] API: GET /api/code/dependencies?file=path
+- [ ] Store in DB: file_dependencies table
 
-## PHASE 3: CORE UI COMPONENTS ✅ COMPLETE
+### 7.4 Smart Code Editing (Partial Updates)
+- [ ] Edit specific functions without rewriting entire file
+- [ ] Add/remove imports automatically
+- [ ] Insert code at correct position (after imports, inside class, etc)
+- [ ] Update function signatures and all call sites
+- [ ] API: POST /api/code/edit with operations: add_function, modify_function, add_import
+- [ ] Use AST to find exact positions
 
-### 3.1-3.4 All Complete
-- Chat interface with streaming, auto-scroll, keyboard shortcuts
-- File explorer with tree structure, search, and file icons
-- Task board with status management and priority levels
-- Metrics dashboard with code stats, dependencies, complexity analysis
-
----
-
-## PHASE 4: FILE SYSTEM OPERATIONS ✅ COMPLETE
-
-### 4.1-4.2 Complete
-- Recursive directory scanner with exclusion patterns
-- File content reader with size limits
-- File type detection and validation
-- Change detection (added/modified/deleted)
-- Full CRUD API endpoints with security
-- Atomic operations with backup/rollback
-- Path sanitization and validation
-
----
-
-## PHASE 4.3: BOLT-LIKE LAYOUT & UI RESTRUCTURE
-
-### 4.3.1 Layout Redesign ✅ COMPLETE
-- [x] Create main app layout: Chat left + File browser right + Terminal bottom
-- [x] Implement responsive grid layout for 3-panel design
-- [x] Add resizable panels with drag handles
-- [x] Store panel sizes in localStorage
-- [x] Create header with model selector and project info
-- [x] Add top navigation bar with project name and controls
-
-### 4.3.2 Chat Interface Enhancement ✅ COMPLETE
-- [x] Rebuild chat interface as left-side panel (40% width)
-- [x] Add chat message streaming with proper formatting
-- [x] Implement code block syntax highlighting in messages
-- [x] Code blocks with language detection and copy button
-- [x] Markdown parsing for headings, lists, quotes, code blocks
-
-### 4.3.3 Project File Browser Panel ✅ COMPLETE
-- [x] Create right-side file browser (30% width)
-- [x] Implement file tree navigation with expand/collapse
-- [x] Add file icons based on extension/type
-- [x] Project selector with directory picker
-- [x] Project list and management
-- [x] Chat list and management
-- [x] File scanning and tree building
-- [x] Search and filter functionality
-
-### 4.3.4 Terminal Panel ✅ COMPLETE
-- [x] Implement bottom terminal panel (30% height)
-- [x] Support Node.js, PHP, Python, Git command execution
-- [x] Add output streaming with color-coded output
-- [x] Implement command history with arrow keys
-- [x] Add Ctrl+C to stop execution
-- [x] Clear terminal functionality
-- [x] Pass project path to terminal for execution context
-
-### 4.3.5 Model Selector Component ✅ COMPLETE
-- [x] Integrate model selector in header
-- [x] Show available models from LM Studio
-- [x] Allow model switching mid-conversation
-- [x] Compact design for header integration
+### 7.5 Database Schema Awareness
+- [ ] Parse DB migrations/schema files
+- [ ] Extract table structure (columns, types, relations)
+- [ ] Detect ORM models (Eloquent, TypeORM, SQLAlchemy)
+- [ ] Link code entities to DB tables
+- [ ] Store schema in DB: schema_info table
+- [ ] API: GET /api/code/schema
 
 ---
 
-## PHASE 5: PROJECT TYPE DETECTION & CONFIG
+## PHASE 8: RESEARCH & PLANNING AGENT
 
-### 5.1.1 Basic Project Detection ✅ COMPLETE
-- [x] Detect Node.js, React, Next.js from package.json
-- [x] Store detected type in database
-- [x] API endpoint for detection
-- [x] Auto-detect on project creation
+### 8.1 Pre-Code Analysis
+- [ ] Create PlannerAgent that runs BEFORE coding
+- [ ] Analyze user request and break into tasks
+- [ ] Search web for best practices
+- [ ] Identify all affected files automatically
+- [ ] Check if DB changes needed
+- [ ] Generate step-by-step plan
+- [ ] API: POST /api/plan/analyze
 
-### 5.1.2 PHP & Python Detection ✅ COMPLETE
-- [x] Detect PHP (Laravel, WordPress, Symfony, CakePHP, CodeIgniter)
-- [x] Detect Python frameworks (Django, Flask, FastAPI)
-- [x] Store framework versions from composer.json/requirements.txt
-- [x] Parse Pipfile and pyproject.toml for Python
-- [x] Detect PHP features (Composer, PHPUnit, Doctrine, Guzzle)
-- [x] Detect Python features (pytest, SQLAlchemy, Celery)
+### 8.2 Impact Analysis
+- [ ] Find all files that import/use target function
+- [ ] Detect DB schema changes needed
+- [ ] Identify test files that need updates
+- [ ] Check for breaking changes
+- [ ] Estimate complexity and time
+- [ ] Present plan to user for approval
 
-### 5.2 Runtime Configuration ✅ COMPLETE
-- [x] Setup Node.js environment detection
-- [x] Setup PHP environment detection (PHP CLI, Composer)
-- [x] Setup Python environment detection
-- [x] Create project config file (.bolt.config.json)
-- [x] Store build/run commands for each project type
-- [x] Add environment variables management
-
-### 5.3 Terminal Integration ✅ COMPLETE
-- [x] Execute build commands (npm run build, composer build, etc.)
-- [x] Execute dev server startup for each type
-- [x] Run tests via terminal
-- [x] Execute scripts from package.json/composer.json
-- [x] Stream output in real-time
-- [x] Handle process management and cleanup
-- [x] Quick action buttons for Install/Build/Dev/Test
-- [x] Load project config automatically
+### 8.3 Auto File Discovery
+- [ ] Use vector search to find related files
+- [ ] Search by semantic similarity
+- [ ] Find files with similar patterns
+- [ ] Detect related UI components
+- [ ] API: POST /api/code/find-related
 
 ---
 
-## PHASE 6: CODE EDITOR INTEGRATION ✅ COMPLETE
+## PHASE 9: MULTI-AGENT ORCHESTRATION
 
-### 6.1 Editor Component ✅ COMPLETE
-- [x] Integrate Monaco Editor with React
-- [x] Add syntax highlighting for all languages (JS/TS/PHP/Python/etc)
-- [x] Implement line numbers and error indicators
-- [x] Multi-file editing tabs with dirty state tracking
-- [x] Auto-save with Ctrl+S keyboard shortcut
-- [x] Partial edit API (line-based, find/replace, regex)
+### 9.1 Agent Types
+- [ ] **PlannerAgent**: Analyzes request, creates plan
+- [ ] **ResearchAgent**: Searches web, finds best practices
+- [ ] **CoderAgent**: Writes/modifies code
+- [ ] **DBAgent**: Handles schema changes, migrations
+- [ ] **ReviewerAgent**: Reviews changes, finds issues
+- [ ] **TesterAgent**: Generates and runs tests
 
-### 6.2 Layout Restructure ✅ COMPLETE
-- [x] Chat left (40%) + File explorer (30%) + Editor center + Terminal bottom
-- [x] 4-panel layout: Chat | Explorer | Editor | Terminal
-- [x] Tab management with close confirmation for unsaved files
-- [x] File loading and saving with database sync
-
----
-
-## PHASE 7: WEB SEARCH INTEGRATION
-
-### 7.1 DuckDuckGo Search API ✅ COMPLETE
-- [x] Install duck-duck-scrape package
-- [x] Create search service wrapper
-- [x] Implement search result parsing
-- [x] Add result caching to avoid duplicate searches
-- [x] Store search results in database
-
-### 7.2 Google Search API (Optional)
-- [ ] Setup Google Custom Search API credentials
-- [ ] Create Google search service
-- [ ] Implement fallback mechanism (DuckDuckGo → Google)
-- [ ] Add search result ranking
-- [ ] Format results for LLM consumption
-
-### 7.3 Search Integration in Chat
-- [ ] Detect when web search is needed
-- [ ] Add search indicator in chat UI
-- [ ] Display search results inline
-- [ ] Implement citation tracking
-- [ ] Add "Search Web" button for manual triggers
-
----
-
-## PHASE 8: MULTI-AGENT SYSTEM
-
-### 8.1 Agent Framework
-- [ ] Design agent base class/interface
-- [ ] Create agent registry
-- [ ] Implement agent capabilities definition
+### 9.2 Agent Communication
+- [ ] Create agent message queue
+- [ ] Implement task handoff protocol
+- [ ] Build agent coordination system
 - [ ] Add agent status tracking
-- [ ] Build agent selection algorithm
+- [ ] Store agent actions in DB: agent_actions table
 
-### 8.2 Specialized Agents
-- [ ] Coder Agent: Code generation and modification
-- [ ] Reviewer Agent: Code review and quality checks
-- [ ] Tester Agent: Test generation and execution
-- [ ] Analyst Agent: Project analysis and metrics
+### 9.3 Workflow Example (Add Birthday Feature)
+```
+User: "Add birthday field to user profile"
 
-### 8.3 Agent Orchestration
-- [ ] Create task routing system
-- [ ] Implement agent communication protocol
-- [ ] Add agent handoff logic
-- [ ] Build agent response aggregation
-- [ ] Create agent performance tracking
+1. PlannerAgent analyzes:
+   - Need DB migration (add birthday column)
+   - Update User model
+   - Modify profile form UI
+   - Update API validation
+   - Add tests
 
----
+2. ResearchAgent searches:
+   - Best date picker libraries
+   - Birthday validation patterns
+   - Privacy considerations
 
-## PHASE 9: AUTO-WORKPLAN GENERATION
+3. DBAgent creates:
+   - Migration file
+   - Updates schema
 
-### 9.1 Workplan Generator
-- [ ] Create API endpoint: POST /api/workplan/generate
-- [ ] Build LLM prompt for task breakdown
-- [ ] Implement workplan parsing from LLM response
-- [ ] Add task dependency detection
-- [ ] Store workplan in database
+4. CoderAgent updates:
+   - User model (adds birthday field)
+   - Profile form (adds date input)
+   - API validation (adds birthday rules)
+   - All using AST for precise edits
 
-### 9.2 Task Priority Assignment
-- [ ] Implement priority calculation algorithm
-- [ ] Add dependency-based ordering
-- [ ] Create priority visualization
-- [ ] Allow manual priority override
+5. TesterAgent generates:
+   - Unit tests for model
+   - API endpoint tests
+   - UI component tests
 
-### 9.3 Workplan UI
-- [ ] Build workplan overview component
-- [ ] Create task timeline visualization
-- [ ] Add progress tracking bar
-- [ ] Implement workplan editing capabilities
-- [ ] Add workplan export (JSON, Markdown)
-
----
-
-## PHASE 10: VECTOR SEARCH & EMBEDDINGS
-
-### 10.1 ChromaDB Integration
-- [ ] Install chromadb package
-- [ ] Setup ChromaDB client connection
-- [ ] Create collection for project files
-- [ ] Implement document chunking strategy
-
-### 10.2 Embedding Generation
-- [ ] Use LM Studio for local embeddings
-- [ ] Implement batch embedding processing
-- [ ] Add embedding caching
-- [ ] Create embedding update pipeline
-
-### 10.3 Semantic Search
-- [ ] Build semantic search API endpoint
-- [ ] Implement similarity search queries
-- [ ] Add search result ranking
-- [ ] Create context augmentation for LLM
-- [ ] Integrate search results into chat context
+6. ReviewerAgent checks:
+   - All related files updated
+   - No breaking changes
+   - Code quality
+```
 
 ---
 
-## PHASE 11: PERFORMANCE OPTIMIZATION
+## PHASE 10: VECTOR SEARCH & SEMANTIC UNDERSTANDING
 
-### 11.1 Lazy Loading Chat History
-- [ ] Implement infinite scroll for messages
-- [ ] Load messages in batches (50 at a time)
-- [ ] Add scroll-to-top detection
-- [ ] Optimize database queries with pagination
-- [ ] Add loading skeleton UI
+### 10.1 Embedding System
+- [ ] Install chromadb or pgvector
+- [ ] Generate embeddings for all files (use LM Studio)
+- [ ] Store embeddings in DB
+- [ ] Update embeddings on file change
+- [ ] API: POST /api/embeddings/generate
 
-### 11.2 File System Caching
-- [ ] Implement file content caching layer
-- [ ] Add cache invalidation on file changes
-- [ ] Create memory-efficient file indexing
-- [ ] Optimize large file handling (streaming)
-
-### 11.3 Response Optimization
-- [ ] Minimize context sent to LLM
-- [ ] Implement smart file selection for context
-- [ ] Add response caching for repeated queries
-- [ ] Optimize streaming chunk size
+### 10.2 Semantic Code Search
+- [ ] Search code by meaning, not keywords
+- [ ] Find similar functions/patterns
+- [ ] Discover related components
+- [ ] Auto-include relevant context for LLM
+- [ ] API: POST /api/search/semantic
 
 ---
 
-## PHASE 12: ADVANCED FEATURES
+## PHASE 11: AUTO-WORKPLAN & TASK BREAKDOWN
 
-### 12.1 PHP & Windows Support
-- [ ] Detect WAMP/XAMPP server installation
-- [ ] Add PHP project type recognition
-- [ ] Implement PHP-specific code analysis
-- [ ] Create MySQL database integration for PHP projects
-- [ ] Add PHP testing framework support (PHPUnit)
+### 11.1 Workplan Generator
+- [ ] API: POST /api/workplan/generate
+- [ ] Break complex request into subtasks
+- [ ] Identify dependencies between tasks
+- [ ] Assign agents to each task
+- [ ] Store in DB: workplans table
+- [ ] UI component to show plan before execution
 
-### 12.2 Project Templates
-- [ ] Create Next.js project template
-- [ ] Create Node.js Express template
-- [ ] Create PHP Laravel template
-- [ ] Create PHP WordPress template
-- [ ] Add custom template creation
-- [ ] Implement template instantiation
-
-### 12.3 Documentation Generator
-- [ ] Create API endpoint: POST /api/docs/generate
-- [ ] Implement code comment extraction
-- [ ] Build Markdown documentation generator
-- [ ] Add API documentation generation
-- [ ] Create README.md auto-generation
-
-### 12.4 Test Generation
-- [ ] Create API endpoint: POST /api/tests/generate
-- [ ] Implement test template selection
-- [ ] Build test case generation with LLM
-- [ ] Add test execution integration
-- [ ] Create test coverage reporting
+### 11.2 Task Execution
+- [ ] Execute tasks in dependency order
+- [ ] Show progress in real-time
+- [ ] Allow user to approve each step
+- [ ] Handle failures and rollback
+- [ ] Store execution logs
 
 ---
 
-## PHASE 13: SECURITY & RELIABILITY
+## PHASE 12: WEB SEARCH INTEGRATION
 
-### 13.1 Input Validation
-- [ ] Add file path sanitization
-- [ ] Implement size limits for file operations
-- [ ] Create request rate limiting
-- [ ] Add SQL injection prevention
-- [ ] Validate all user inputs
+### 12.1 Auto-Trigger Search
+- [ ] Detect when search needed (unknown libraries, new concepts)
+- [ ] Trigger ResearchAgent automatically
+- [ ] Show search results inline in chat
+- [ ] Cache results in DB
+- [ ] Add citation to responses
 
-### 13.2 Error Handling
-- [ ] Create global error handler
-- [ ] Add detailed error logging
-- [ ] Implement graceful fallbacks
-- [ ] Create user-friendly error messages
-- [ ] Add error recovery mechanisms
-
-### 13.3 Security Scanning
-- [ ] Integrate dependency vulnerability scanner
-- [ ] Add code security pattern detection
-- [ ] Create security report generation
-- [ ] Implement security best practices checker
+### 12.2 Manual Search
+- [ ] Add "Search Web" button in chat
+- [ ] Search for: code examples, docs, best practices
+- [ ] Format results for LLM context
 
 ---
 
-## PHASE 14: UI/UX POLISH
+## PHASE 13: PERFORMANCE & OPTIMIZATION
 
-### 14.1 Responsive Design
-- [ ] Mobile layout optimization
-- [ ] Tablet breakpoint adjustments
-- [ ] Desktop layout enhancements (3-panel focus)
-- [ ] Touch gesture support for panels
-- [ ] Full-screen editor mode
+### 13.1 Caching
+- [ ] File content cache
+- [ ] AST parse cache
+- [ ] Search result cache
+- [ ] LLM response cache for common queries
 
-### 14.2 Dark/Light Mode
-- [ ] Create theme context provider
-- [ ] Implement theme toggle
-- [ ] Add theme persistence
-- [ ] Style all components for both themes
-- [ ] Syntax highlighting theme support
-
-### 14.3 Accessibility
-- [ ] Add ARIA labels
-- [ ] Implement keyboard navigation
-- [ ] Create screen reader support
-- [ ] Add focus indicators
-- [ ] Terminal accessibility
-
-### 14.4 Loading States
-- [ ] Create skeleton loaders
-- [ ] Add progress indicators
-- [ ] Implement optimistic UI updates
-- [ ] Add error state visuals
-- [ ] Terminal loading indicators
+### 13.2 Lazy Loading
+- [ ] Chat history pagination
+- [ ] File tree virtualization
+- [ ] Incremental file scanning
 
 ---
 
-## PHASE 15: TESTING & DEPLOYMENT
+## PHASE 14: ADVANCED FEATURES
 
-### 15.1 Unit Tests
-- [ ] Setup Jest testing framework
-- [ ] Write database utility tests
-- [ ] Create component tests
-- [ ] Add API endpoint tests
-- [ ] Terminal command tests
+### 14.1 Project Templates
+- [ ] Next.js, React, PHP Laravel, WordPress templates
+- [ ] Template instantiation with config
 
-### 15.2 Integration Tests
-- [ ] Test file operations end-to-end
-- [ ] Test chat flow with LM Studio
-- [ ] Test multi-agent task routing
-- [ ] Test workplan generation
-- [ ] Test project detection and setup
+### 14.2 Test Generation
+- [ ] Auto-generate unit tests
+- [ ] Integration test scaffolding
+- [ ] Run tests via terminal
 
-### 15.3 Production Build
-- [ ] Optimize Next.js build configuration
-- [ ] Minify and bundle assets
-- [ ] Setup environment-specific configs
-- [ ] Create production database migrations
-- [ ] Build packaging for distribution
+### 14.3 Documentation
+- [ ] Auto-generate JSDoc/PHPDoc comments
+- [ ] Create API documentation
+- [ ] Generate README
 
 ---
 
-## STATUS
-**Phase:** 7.3 - Search Integration in Chat (Next)
-**Progress:** 7.1 Complete
-**Completed:** DuckDuckGo search service with code/docs/best-practices search, caching, database storage
-**Next:** Integrate search in chat interface with auto-detection and manual triggers
+## PHASE 15: SECURITY & POLISH
+
+### 15.1 Security
+- [ ] Dependency vulnerability scanning
+- [ ] Code security analysis
+- [ ] Input validation
+
+### 15.2 UI/UX
+- [ ] Dark/light mode
+- [ ] Mobile responsive
+- [ ] Accessibility improvements
+
+---
+
+## CURRENT STATUS
+**Phase:** 7.2 - Code Parser & AST Analysis (NEXT - CRITICAL)
+**Priority:** Must build intelligent code understanding before system is useful
+**Goal:** System should understand code structure, not just manipulate text
+
+**Why This Matters:**
+- Current system only does find/replace - not safe for real projects
+- Need AST parsing to edit functions without breaking code
+- Must track dependencies to find all affected files
+- Database awareness required for full-stack changes
+- Planning phase prevents mistakes and incomplete updates
+
+**Next Steps:**
+1. Install language parsers
+2. Build AST analysis service
+3. Create dependency tracker
+4. Implement smart code editing
+5. Add database schema detection
