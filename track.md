@@ -47,7 +47,7 @@
 ## PHASE 4.3: BOLT-LIKE LAYOUT & UI RESTRUCTURE
 
 ### 4.3.1 Layout Redesign (In Progress)
-- [ ] Create main app layout: Chat left + File browser and editor/preview right + Terminal bottom
+- [ ] Create main app layout: Chat left + File browser and editor right + Terminal bottom
 - [ ] Implement responsive grid layout for 3-panel design
 - [ ] Add resizable panels with drag handles
 - [ ] Store panel sizes in localStorage
