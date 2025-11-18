@@ -16,18 +16,20 @@
 
 #### 7.2.2 Build Parser Service
 - [ ] Create lib/code-parser/ directory
+
+#### 7.2.3
 - [ ] JS/TS parser class
 - [ ] PHP parser class
 
-#### 7.2.3 Extract Code Structure
+#### 7.2.4 Extract Code Structure
 - [ ] Extract functions, classes, imports, exports
 - [ ] Identify function boundaries
 
-#### 7.2.4 DB Storage
+#### 7.2.5 DB Storage
 - [ ] Migration: code_entities table
 - [ ] Store parsed data
 
-#### 7.2.5 API Endpoint
+#### 7.2.6 API Endpoint
 - [ ] POST /api/code/analyze
 
 ### 7.3 Cross-File Dependency Tracking
