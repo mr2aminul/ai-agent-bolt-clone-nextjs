@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import AppHeader from '@/components/app-header';
 import ChatInterface from '@/components/chat-interface';
 import FileExplorer, { FileNode } from '@/components/file-explorer';
+import EditorTabs from '@/components/editor-tabs';
 import TerminalPanel from '@/components/terminal-panel';
 import ResizablePanel from '@/components/resizable-panel';
 import NewProjectModal from '@/components/new-project-modal';
@@ -24,6 +25,13 @@ interface Chat {
   created_at: string;
 }
 
+interface EditorTab {
+  id: string;
+  path: string;
+  content: string;
+  isDirty?: boolean;
+}
+
 export default function Home() {
   const [selectedModel, setSelectedModel] = useState<string | null>(null);
   const [currentProject, setCurrentProject] = useState<Project | null>(null);
@@ -31,6 +39,8 @@ export default function Home() {
   const [showNewProjectModal, setShowNewProjectModal] = useState(false);
   const [projectFiles, setProjectFiles] = useState<FileNode[]>([]);
   const [loadingFiles, setLoadingFiles] = useState(false);
+  const [openTabs, setOpenTabs] = useState<EditorTab[]>([]);
+  const [activeTabId, setActiveTabId] = useState<string | null>(null);
 
   useEffect(() => {
     if (currentProject?.path) {
@@ -164,6 +174,98 @@ export default function Home() {
     }
   };
 
+  const handleFileSelect = async (filePath: string) => {
+    const existingTab = openTabs.find((tab) => tab.path === filePath);
+    if (existingTab) {
+      setActiveTabId(existingTab.id);
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/files/read?path=${encodeURIComponent(filePath)}`);
+      const data = await response.json();
+
+      if (data.success && data.content !== undefined) {
+        const newTab: EditorTab = {
+          id: `${Date.now()}-${filePath}`,
+          path: filePath,
+          content: data.content,
+          isDirty: false,
+        };
+
+        setOpenTabs((prev) => [...prev, newTab]);
+        setActiveTabId(newTab.id);
+      }
+    } catch (error) {
+      console.error('Failed to load file:', error);
+    }
+  };
+
+  const handleTabClose = (tabId: string) => {
+    const tab = openTabs.find((t) => t.id === tabId);
+    if (tab?.isDirty) {
+      if (!confirm(`"${tab.path}" has unsaved changes. Close anyway?`)) {
+        return;
+      }
+    }
+
+    setOpenTabs((prev) => prev.filter((t) => t.id !== tabId));
+
+    if (activeTabId === tabId) {
+      const remainingTabs = openTabs.filter((t) => t.id !== tabId);
+      setActiveTabId(remainingTabs.length > 0 ? remainingTabs[0].id : null);
+    }
+  };
+
+  const handleSave = async (tabId: string, content: string) => {
+    const tab = openTabs.find((t) => t.id === tabId);
+    if (!tab) return;
+
+    try {
+      const filesList = await fetch(`/api/projects/scan`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          projectId: currentProject?.id,
+          projectPath: currentProject?.path,
+          includeContent: false,
+        }),
+      });
+
+      const filesData = await filesList.json();
+      const fileInfo = filesData.files?.find((f: any) => f.path === tab.path);
+
+      if (!fileInfo) {
+        console.error('File not found in database');
+        return;
+      }
+
+      const response = await fetch('/api/files/update', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fileId: fileInfo.id,
+          path: tab.path,
+          content,
+        }),
+      });
+
+      if (response.ok) {
+        setOpenTabs((prev) =>
+          prev.map((t) => (t.id === tabId ? { ...t, content, isDirty: false } : t))
+        );
+      }
+    } catch (error) {
+      console.error('Failed to save file:', error);
+    }
+  };
+
+  const handleContentChange = (tabId: string, content: string) => {
+    setOpenTabs((prev) =>
+      prev.map((t) => (t.id === tabId ? { ...t, content, isDirty: true } : t))
+    );
+  };
+
   return (
     <div className="flex flex-col h-screen bg-gray-950">
       <AppHeader
@@ -195,13 +297,13 @@ export default function Home() {
           </div>
         </ResizablePanel>
 
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 flex overflow-hidden">
           <ResizablePanel
-            direction="vertical"
-            defaultSize={70}
-            minSize={40}
-            maxSize={85}
-            storageKey="editor-panel-size"
+            direction="horizontal"
+            defaultSize={30}
+            minSize={20}
+            maxSize={50}
+            storageKey="file-explorer-size"
           >
             <div className="h-full p-2">
               {loadingFiles ? (
@@ -211,14 +313,35 @@ export default function Home() {
               ) : (
                 <FileExplorer
                   files={projectFiles}
-                  onFileSelect={(path) => console.log('Selected file:', path)}
+                  onFileSelect={handleFileSelect}
                 />
               )}
             </div>
           </ResizablePanel>
 
-          <div className="flex-1 overflow-hidden">
-            <TerminalPanel projectPath={currentProject?.path} />
+          <div className="flex-1 flex flex-col overflow-hidden">
+            <ResizablePanel
+              direction="vertical"
+              defaultSize={70}
+              minSize={40}
+              maxSize={85}
+              storageKey="editor-panel-size"
+            >
+              <div className="h-full p-2">
+                <EditorTabs
+                  tabs={openTabs}
+                  activeTabId={activeTabId}
+                  onTabChange={setActiveTabId}
+                  onTabClose={handleTabClose}
+                  onSave={handleSave}
+                  onContentChange={handleContentChange}
+                />
+              </div>
+            </ResizablePanel>
+
+            <div className="flex-1 overflow-hidden">
+              <TerminalPanel projectPath={currentProject?.path} />
+            </div>
           </div>
         </div>
       </div>
