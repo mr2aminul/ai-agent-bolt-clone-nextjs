@@ -17,10 +17,15 @@
 - [x] API endpoint with DB storage option
 
 ### 7.3 Cross-File Dependency Tracking
+#### 7.3.1
 - [ ] Build import/export graph
 - [ ] Track function calls across files
+
+#### 7.3.1
 - [ ] Identify database schema references in code
 - [ ] Create dependency map (which files affect which)
+
+#### 7.3.1
 - [ ] API: GET /api/code/dependencies?file=path
 - [ ] Store in DB: file_dependencies table
 
