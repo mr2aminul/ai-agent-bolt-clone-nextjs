@@ -104,13 +104,13 @@
 - [x] Detect PHP features (Composer, PHPUnit, Doctrine, Guzzle)
 - [x] Detect Python features (pytest, SQLAlchemy, Celery)
 
-### 5.2 Runtime Configuration
-- [ ] Setup Node.js environment detection
-- [ ] Setup PHP environment detection (PHP CLI, Composer)
-- [ ] Setup Python environment detection
-- [ ] Create project config file (.bolt.config.json)
-- [ ] Store build/run commands for each project type
-- [ ] Add environment variables management
+### 5.2 Runtime Configuration ✅ COMPLETE
+- [x] Setup Node.js environment detection
+- [x] Setup PHP environment detection (PHP CLI, Composer)
+- [x] Setup Python environment detection
+- [x] Create project config file (.bolt.config.json)
+- [x] Store build/run commands for each project type
+- [x] Add environment variables management
 
 ### 5.3 Terminal Integration
 - [ ] Execute build commands (npm run build, composer build, etc.)
@@ -376,7 +376,7 @@
 ---
 
 ## STATUS
-**Phase:** 5.2 - Runtime Configuration (Next)
-**Progress:** 5.1.2 Complete
-**Completed:** PHP & Python detection with Laravel, WordPress, Django, Flask, FastAPI
-**Next:** Setup environment detection for Node.js, PHP, Python
+**Phase:** 5.3 - Terminal Integration (Next)
+**Progress:** 5.2 Complete
+**Completed:** Runtime detection for Node.js, PHP, Python with config generation & env management
+**Next:** Execute build/dev/test commands via terminal

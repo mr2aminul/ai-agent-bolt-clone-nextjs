@@ -3,6 +3,7 @@
 import ModelSelector from './model-selector';
 import ProjectSelector from './project-selector';
 import ChatList from './chat-list';
+import RuntimeStatus from './runtime-status';
 
 interface Project {
   id: string;
@@ -62,6 +63,7 @@ export default function AppHeader({
           onNewChat={onNewChat}
           onChatDelete={onChatDelete}
         />
+        <RuntimeStatus />
         <div className="w-64">
           <ModelSelector selectedModel={selectedModel} onModelChange={onModelChange} />
         </div>
