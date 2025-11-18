@@ -1,0 +1,5 @@
+- Complete each step fully before moving to the next
+- Test each feature in isolation before integration
+- Keep commits small and focused
+- Document any deviations from the plan
+- Update this tracker after completing each step
