@@ -4,6 +4,7 @@
 - **Phase 1-6**: Foundation, DB, LM Studio, UI, File Ops, Editor
 - **Phase 7.1**: DuckDuckGo search with caching
 - **Phase 7.2**: Code Parser & AST Analysis with DB storage
+- **Phase 7.3**: Cross-File Dependency Tracking
 
 ---
 
@@ -16,18 +17,11 @@
 - [x] Query functions for code entities
 - [x] API endpoint with DB storage option
 
-### 7.3 Cross-File Dependency Tracking
-#### 7.3.1
-- [ ] Build import/export graph
-- [ ] Track function calls across files
-
-#### 7.3.1
-- [ ] Identify database schema references in code
-- [ ] Create dependency map (which files affect which)
-
-#### 7.3.1
-- [ ] API: GET /api/code/dependencies?file=path
-- [ ] Store in DB: file_dependencies table
+### 7.3 Cross-File Dependency Tracking (DONE)
+- [x] Build import/export graph
+- [x] Track function calls across files
+- [x] Create dependency map
+- [x] API: GET /api/code/dependencies
 
 ### 7.4 Smart Code Editing (Partial Updates)
 - [ ] Edit specific functions without rewriting entire file
@@ -232,6 +226,6 @@ User: "Add birthday field to user profile"
 ---
 
 ## CURRENT STATUS
-**Phase:** 7.3 - Cross-File Dependency Tracking (NEXT)
-**Completed:** 7.2 - Code Parser & AST Analysis with DB storage
-**Next:** Build import/export graph and dependency tracking
+**Phase:** 7.4 - Smart Code Editing (NEXT)
+**Completed:** 7.3 - Cross-File Dependency Tracking
+**Next:** Edit specific functions without rewriting entire file
