@@ -17,7 +17,7 @@
 #### 7.2.2 Build Parser Service
 - [ ] Create lib/code-parser/ directory
 
-#### 7.2.3
+#### 7.2.3 Build Parser Service
 - [ ] JS/TS parser class
 - [ ] PHP parser class
 
