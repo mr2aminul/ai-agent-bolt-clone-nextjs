@@ -3,34 +3,29 @@
 ## COMPLETED ✅
 - **Phase 1-6**: Foundation, DB, LM Studio, UI, File Ops, Editor
 - **Phase 7.1**: DuckDuckGo search with caching
-- **Phase 7.2.1**: Language parsers installed
+- **Phase 7.2.1-7.2.4**: Parser services with AST analysis
+- **Phase 7.2.6**: API endpoint for code analysis
 
 ---
 
 ## PHASE 7: INTELLIGENT CODE UNDERSTANDING
 
 ### 7.2 Code Parser & AST Analysis
-#### 7.2.1 Install Parsers
+#### 7.2.1-7.2.4 Parser Services (DONE)
 - [x] @babel/parser, @babel/traverse for JS/TS
 - [x] php-parser for PHP
+- [x] lib/code-parser/ directory structure
+- [x] JS/TS parser: functions, classes, methods, imports, exports
+- [x] PHP parser: classes, methods, properties, interfaces, use statements
+- [x] AST traversal and entity extraction
+- [x] Function boundary identification
 
-#### 7.2.2
-- [ ] Create lib/code-parser/ directory
-
-#### 7.2.3 Build Parser Service
-- [ ] JS/TS parser class
-- [ ] PHP parser class
-
-#### 7.2.4 Extract Code Structure
-- [ ] Extract functions, classes, imports, exports
-- [ ] Identify function boundaries
-
-#### 7.2.5 DB Storage
+#### 7.2.5 DB Storage (NEXT)
 - [ ] Migration: code_entities table
 - [ ] Store parsed data
 
-#### 7.2.6 API Endpoint
-- [ ] POST /api/code/analyze
+#### 7.2.6 API Endpoint (DONE)
+- [x] POST /api/code/analyze with stats
 
 ### 7.3 Cross-File Dependency Tracking
 - [ ] Build import/export graph
@@ -243,6 +238,6 @@ User: "Add birthday field to user profile"
 ---
 
 ## CURRENT STATUS
-**Phase:** 7.2.2 - Build Parser Service (NEXT)
-**Completed:** 7.2.1 - Parsers installed
-**Next:** Create parser service classes for JS/TS/PHP
+**Phase:** 7.2.5 - DB Storage (NEXT)
+**Completed:** 7.2.1-7.2.4 - Parser services with AST analysis
+**Next:** Create code_entities table migration and storage
