@@ -198,7 +198,7 @@ export default function Home() {
           </ResizablePanel>
 
           <div className="flex-1 overflow-hidden">
-            <TerminalPanel />
+            <TerminalPanel projectPath={currentProject?.path} />
           </div>
         </div>
       </div>
