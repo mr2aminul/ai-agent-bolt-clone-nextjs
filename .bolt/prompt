@@ -1,0 +1,9 @@
+note: our target is update our existing entire php project. this will be directly the project dir's files automatically, i don't want to manually copy and update the file.
+
+- Complete each step fully before moving to the next
+- Test each feature in isolation before integration
+- Keep commits small and focused
+- Document any deviations from the plan
+- Update this tracker after completing each step
+
+keep updated the track.md for completed progress, keep the track.md smaller to lower token use
