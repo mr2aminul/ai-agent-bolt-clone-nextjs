@@ -13,7 +13,7 @@
 **Phase 7.5**: Database Schema Awareness
 - [ ] Parse migrations & detect table structures
 - [ ] Extract columns, types, relations
-- [ ] Detect ORM models (Eloquent, TypeORM, etc.)
+- [ ] Detect ORM models (Eloquent, TypeORM, etc.) also detect .sql .db etc or mysql databases 
 - [ ] Link code entities to DB tables
 - [ ] API: GET /api/code/schema
 
