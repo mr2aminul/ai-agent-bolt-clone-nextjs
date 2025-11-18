@@ -66,7 +66,7 @@
 - [ ] Create right-side file browser (30% width)
 - [ ] Implement file tree navigation with expand/collapse
 - [ ] Add file icons based on extension/type
-- [ ] Implement quick file preview on hover
+- [ ] Implement file preview/edit on click
 - [ ] Add file operations context menu (create/delete/rename)
 - [ ] Search and filter functionality
 - [ ] Breadcrumb navigation for current file path
