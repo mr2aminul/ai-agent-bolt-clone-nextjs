@@ -9,6 +9,14 @@ interface TerminalLine {
   timestamp: Date;
 }
 
+interface ProjectConfig {
+  buildCommand?: string;
+  devCommand?: string;
+  testCommand?: string;
+  installCommand?: string;
+  environmentVariables?: Record<string, string>;
+}
+
 interface TerminalPanelProps {
   projectPath?: string | null;
 }
@@ -32,12 +40,32 @@ export default function TerminalPanel({ projectPath }: TerminalPanelProps) {
   const [history, setHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [isExecuting, setIsExecuting] = useState(false);
-  const [activeTab, setActiveTab] = useState(0);
+  const [projectConfig, setProjectConfig] = useState<ProjectConfig | null>(null);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const outputRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
   const lineIdRef = useRef(2);
+
+  useEffect(() => {
+    if (projectPath) {
+      loadProjectConfig();
+    }
+  }, [projectPath]);
+
+  const loadProjectConfig = async () => {
+    if (!projectPath) return;
+
+    try {
+      const response = await fetch(`/api/projects/config?projectPath=${encodeURIComponent(projectPath)}`);
+      const data = await response.json();
+      if (data.success && data.config) {
+        setProjectConfig(data.config);
+      }
+    } catch (error) {
+      console.error('Failed to load project config:', error);
+    }
+  };
 
   useEffect(() => {
     if (outputRef.current) {
@@ -206,6 +234,46 @@ export default function TerminalPanel({ projectPath }: TerminalPanelProps) {
           )}
         </div>
         <div className="flex gap-2">
+          {projectConfig?.installCommand && (
+            <button
+              onClick={() => executeCommand(projectConfig.installCommand!)}
+              disabled={isExecuting}
+              className="px-2 py-1 text-xs bg-gray-800 hover:bg-gray-700 rounded transition-colors text-gray-300 disabled:opacity-50"
+              title="Install dependencies"
+            >
+              Install
+            </button>
+          )}
+          {projectConfig?.buildCommand && (
+            <button
+              onClick={() => executeCommand(projectConfig.buildCommand!)}
+              disabled={isExecuting}
+              className="px-2 py-1 text-xs bg-blue-600 hover:bg-blue-700 rounded transition-colors text-white disabled:opacity-50"
+              title="Build project"
+            >
+              Build
+            </button>
+          )}
+          {projectConfig?.devCommand && (
+            <button
+              onClick={() => executeCommand(projectConfig.devCommand!)}
+              disabled={isExecuting}
+              className="px-2 py-1 text-xs bg-green-600 hover:bg-green-700 rounded transition-colors text-white disabled:opacity-50"
+              title="Start dev server"
+            >
+              Dev
+            </button>
+          )}
+          {projectConfig?.testCommand && (
+            <button
+              onClick={() => executeCommand(projectConfig.testCommand!)}
+              disabled={isExecuting}
+              className="px-2 py-1 text-xs bg-yellow-600 hover:bg-yellow-700 rounded transition-colors text-white disabled:opacity-50"
+              title="Run tests"
+            >
+              Test
+            </button>
+          )}
           {isExecuting && (
             <button
               onClick={stopExecution}
