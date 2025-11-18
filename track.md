@@ -61,7 +61,7 @@
 - [x] Code blocks with language detection and copy button
 - [x] Markdown parsing for headings, lists, quotes, code blocks
 
-### 4.3.3 File Browser Panel
+### 4.3.3 Project File Browser Panel
 - [ ] Create right-side file browser (30% width)
 - [ ] Implement file tree navigation with expand/collapse
 - [ ] Add file icons based on extension/type
