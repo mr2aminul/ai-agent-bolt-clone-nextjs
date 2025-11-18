@@ -90,13 +90,16 @@
 
 ## PHASE 5: PROJECT TYPE DETECTION & CONFIG
 
-### 5.1 Project Detection
-- [ ] Detect project type from package.json
-- [ ] Support: Next.js, Node.js, React, Vue, Nuxt
-- [ ] Detect: PHP (Laravel, WordPress, custom)
-- [ ] Detect: Python, Go, Rust frameworks
-- [ ] Store detected type in database
-- [ ] Auto-select appropriate LLM context
+### 5.1.1 Basic Project Detection ✅ COMPLETE
+- [x] Detect Node.js, React, Next.js from package.json
+- [x] Store detected type in database
+- [x] API endpoint for detection
+- [x] Auto-detect on project creation
+
+### 5.1.2 PHP & Python Detection
+- [ ] Detect PHP (Laravel, WordPress, custom)
+- [ ] Detect Python frameworks
+- [ ] Store framework versions
 
 ### 5.2 Runtime Configuration
 - [ ] Setup Node.js environment detection
@@ -370,7 +373,7 @@
 ---
 
 ## STATUS
-**Phase:** 5.1 - Project Type Detection (Next)
-**Progress:** Phase 4 Complete (4/15)
-**Completed:** Full Bolt-like layout with chat, file browser, terminal
-**Next:** Detect project types (Node.js, PHP, Python) from filesystem
+**Phase:** 5.1.2 - PHP & Python Detection (Next)
+**Progress:** 5.1.1 Complete
+**Completed:** Node.js/React/Next.js detection with auto-detect on project creation
+**Next:** PHP & Python framework detection

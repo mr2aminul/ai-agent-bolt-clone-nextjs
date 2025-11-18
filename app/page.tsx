@@ -116,6 +116,15 @@ export default function Home() {
       if (data.success) {
         setCurrentProject(data.project);
         setShowNewProjectModal(false);
+
+        await fetch('/api/projects/detect', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            projectId: data.project.id,
+            projectPath: path,
+          }),
+        });
       }
     } catch (error) {
       console.error('Failed to create project:', error);
