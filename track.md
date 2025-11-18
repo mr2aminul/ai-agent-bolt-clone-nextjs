@@ -5,227 +5,53 @@
 - **Phase 7.1**: DuckDuckGo search with caching
 - **Phase 7.2**: Code Parser & AST Analysis with DB storage
 - **Phase 7.3**: Cross-File Dependency Tracking
+- **Phase 7.4**: Smart Code Editing (AST-based partial updates)
 
 ---
 
-## PHASE 7: INTELLIGENT CODE UNDERSTANDING
-
-### 7.2 Code Parser & AST Analysis (DONE)
-- [x] Parser services (JS/TS, PHP)
-- [x] AST traversal and entity extraction
-- [x] DB migration: code_entities, code_imports, code_exports tables
-- [x] Query functions for code entities
-- [x] API endpoint with DB storage option
-
-### 7.3 Cross-File Dependency Tracking (DONE)
-- [x] Build import/export graph
-- [x] Track function calls across files
-- [x] Create dependency map
-- [x] API: GET /api/code/dependencies
-
-### 7.4 Smart Code Editing (Partial Updates)
-- [ ] Edit specific functions without rewriting entire file
-- [ ] Add/remove imports automatically
-- [ ] Insert code at correct position (after imports, inside class, etc)
-- [ ] Update function signatures and all call sites
-- [ ] API: POST /api/code/edit with operations: add_function, modify_function, add_import
-- [ ] Use AST to find exact positions
-
-### 7.5 Database Schema Awareness
-- [ ] Parse DB migrations/schema files
-- [ ] Extract table structure (columns, types, relations)
-- [ ] Detect ORM models (Eloquent, TypeORM, SQLAlchemy)
+## IN PROGRESS
+**Phase 7.5**: Database Schema Awareness
+- [ ] Parse migrations & detect table structures
+- [ ] Extract columns, types, relations
+- [ ] Detect ORM models (Eloquent, TypeORM, etc.)
 - [ ] Link code entities to DB tables
-- [ ] Store schema in DB: schema_info table
 - [ ] API: GET /api/code/schema
 
 ---
 
-## PHASE 8: RESEARCH & PLANNING AGENT
+## TODO (High Priority)
+**Phase 8**: Research & Planning Agent
+- PlannerAgent: Break down user requests
+- ResearchAgent: Web search for best practices
+- Auto-detect affected files
 
-### 8.1 Pre-Code Analysis
-- [ ] Create PlannerAgent that runs BEFORE coding
-- [ ] Analyze user request and break into tasks
-- [ ] Search web for best practices
-- [ ] Identify all affected files automatically
-- [ ] Check if DB changes needed
-- [ ] Generate step-by-step plan
-- [ ] API: POST /api/plan/analyze
+**Phase 9**: Multi-Agent Orchestration
+- Agent types: Planner, Researcher, Coder, DB, Reviewer, Tester
+- Message queue & task handoff
+- Workflow coordination
 
-### 8.2 Impact Analysis
-- [ ] Find all files that import/use target function
-- [ ] Detect DB schema changes needed
-- [ ] Identify test files that need updates
-- [ ] Check for breaking changes
-- [ ] Estimate complexity and time
-- [ ] Present plan to user for approval
-
-### 8.3 Auto File Discovery
-- [ ] Use vector search to find related files
-- [ ] Search by semantic similarity
-- [ ] Find files with similar patterns
-- [ ] Detect related UI components
-- [ ] API: POST /api/code/find-related
+**Phase 10**: Vector Search & Semantic Understanding
+- Embedding system (pgvector/chromadb)
+- Semantic code search by meaning
+- Find similar functions/patterns
 
 ---
 
-## PHASE 9: MULTI-AGENT ORCHESTRATION
-
-### 9.1 Agent Types
-- [ ] **PlannerAgent**: Analyzes request, creates plan
-- [ ] **ResearchAgent**: Searches web, finds best practices
-- [ ] **CoderAgent**: Writes/modifies code
-- [ ] **DBAgent**: Handles schema changes, migrations
-- [ ] **ReviewerAgent**: Reviews changes, finds issues
-- [ ] **TesterAgent**: Generates and runs tests
-
-### 9.2 Agent Communication
-- [ ] Create agent message queue
-- [ ] Implement task handoff protocol
-- [ ] Build agent coordination system
-- [ ] Add agent status tracking
-- [ ] Store agent actions in DB: agent_actions table
-
-### 9.3 Workflow Example (Add Birthday Feature)
-```
-User: "Add birthday field to user profile"
-
-1. PlannerAgent analyzes:
-   - Need DB migration (add birthday column)
-   - Update User model
-   - Modify profile form UI
-   - Update API validation
-   - Add tests
-
-2. ResearchAgent searches:
-   - Best date picker libraries
-   - Birthday validation patterns
-   - Privacy considerations
-
-3. DBAgent creates:
-   - Migration file
-   - Updates schema
-
-4. CoderAgent updates:
-   - User model (adds birthday field)
-   - Profile form (adds date input)
-   - API validation (adds birthday rules)
-   - All using AST for precise edits
-
-5. TesterAgent generates:
-   - Unit tests for model
-   - API endpoint tests
-   - UI component tests
-
-6. ReviewerAgent checks:
-   - All related files updated
-   - No breaking changes
-   - Code quality
-```
+## TODO (Future)
+- Phase 11: Auto-Workplan & Task Breakdown
+- Phase 12: Web Search Integration
+- Phase 13: Performance & Optimization
+- Phase 14: Advanced Features (Templates, Tests, Docs)
+- Phase 15: Security & Polish
 
 ---
 
-## PHASE 10: VECTOR SEARCH & SEMANTIC UNDERSTANDING
-
-### 10.1 Embedding System
-- [ ] Install chromadb or pgvector
-- [ ] Generate embeddings for all files (use LM Studio)
-- [ ] Store embeddings in DB
-- [ ] Update embeddings on file change
-- [ ] API: POST /api/embeddings/generate
-
-### 10.2 Semantic Code Search
-- [ ] Search code by meaning, not keywords
-- [ ] Find similar functions/patterns
-- [ ] Discover related components
-- [ ] Auto-include relevant context for LLM
-- [ ] API: POST /api/search/semantic
-
----
-
-## PHASE 11: AUTO-WORKPLAN & TASK BREAKDOWN
-
-### 11.1 Workplan Generator
-- [ ] API: POST /api/workplan/generate
-- [ ] Break complex request into subtasks
-- [ ] Identify dependencies between tasks
-- [ ] Assign agents to each task
-- [ ] Store in DB: workplans table
-- [ ] UI component to show plan before execution
-
-### 11.2 Task Execution
-- [ ] Execute tasks in dependency order
-- [ ] Show progress in real-time
-- [ ] Allow user to approve each step
-- [ ] Handle failures and rollback
-- [ ] Store execution logs
-
----
-
-## PHASE 12: WEB SEARCH INTEGRATION
-
-### 12.1 Auto-Trigger Search
-- [ ] Detect when search needed (unknown libraries, new concepts)
-- [ ] Trigger ResearchAgent automatically
-- [ ] Show search results inline in chat
-- [ ] Cache results in DB
-- [ ] Add citation to responses
-
-### 12.2 Manual Search
-- [ ] Add "Search Web" button in chat
-- [ ] Search for: code examples, docs, best practices
-- [ ] Format results for LLM context
-
----
-
-## PHASE 13: PERFORMANCE & OPTIMIZATION
-
-### 13.1 Caching
-- [ ] File content cache
-- [ ] AST parse cache
-- [ ] Search result cache
-- [ ] LLM response cache for common queries
-
-### 13.2 Lazy Loading
-- [ ] Chat history pagination
-- [ ] File tree virtualization
-- [ ] Incremental file scanning
-
----
-
-## PHASE 14: ADVANCED FEATURES
-
-### 14.1 Project Templates
-- [ ] Next.js, React, PHP Laravel, WordPress templates
-- [ ] Template instantiation with config
-
-### 14.2 Test Generation
-- [ ] Auto-generate unit tests
-- [ ] Integration test scaffolding
-- [ ] Run tests via terminal
-
-### 14.3 Documentation
-- [ ] Auto-generate JSDoc/PHPDoc comments
-- [ ] Create API documentation
-- [ ] Generate README
-
----
-
-## PHASE 15: SECURITY & POLISH
-
-### 15.1 Security
-- [ ] Dependency vulnerability scanning
-- [ ] Code security analysis
-- [ ] Input validation
-
-### 15.2 UI/UX
-- [ ] Dark/light mode
-- [ ] Mobile responsive
-- [ ] Accessibility improvements
-
----
+## KEY FILES
+- `lib/code-parser/`: JS/PHP AST parsing
+- `lib/code-editor/`: Smart editing (add/modify functions, imports)
+- `lib/dependency-tracker.ts`: Build dependency graphs
+- `app/api/code/`: All code analysis endpoints
 
 ## CURRENT STATUS
-**Phase:** 7.4 - Smart Code Editing (NEXT)
-**Completed:** 7.3 - Cross-File Dependency Tracking
-**Next:** Edit specific functions without rewriting entire file
+**Phase:** 7.5 - Database Schema Awareness (NEXT)
+**Last Done:** 7.4 - Smart Code Editing
