@@ -14,7 +14,7 @@
 - [x] @babel/parser, @babel/traverse for JS/TS
 - [x] php-parser for PHP
 
-#### 7.2.2 Build Parser Service
+#### 7.2.2
 - [ ] Create lib/code-parser/ directory
 
 #### 7.2.3 Build Parser Service
