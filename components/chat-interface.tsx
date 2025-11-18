@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import type { ChatMessage } from '@/lib/lm-studio/client';
+import MessageRenderer from './message-renderer';
 
 interface ChatInterfaceProps {
   modelPath: string | null;
@@ -150,7 +151,11 @@ export default function ChatInterface({ modelPath, agentType = 'default' }: Chat
               <p className="text-xs font-semibold mb-1 opacity-75">
                 {message.role === 'user' ? 'You' : 'Assistant'}
               </p>
-              <p className="whitespace-pre-wrap">{message.content}</p>
+              {message.role === 'user' ? (
+                <p className="whitespace-pre-wrap">{message.content}</p>
+              ) : (
+                <MessageRenderer content={message.content} />
+              )}
             </div>
           </div>
         ))}
@@ -159,7 +164,7 @@ export default function ChatInterface({ modelPath, agentType = 'default' }: Chat
           <div className="flex justify-start">
             <div className="max-w-[80%] rounded-lg p-3 bg-gray-800 text-gray-100">
               <p className="text-xs font-semibold mb-1 opacity-75">Assistant</p>
-              <p className="whitespace-pre-wrap">{streamingMessage}</p>
+              <MessageRenderer content={streamingMessage} />
               <span className="inline-block w-2 h-4 bg-blue-500 animate-pulse ml-1"></span>
             </div>
           </div>

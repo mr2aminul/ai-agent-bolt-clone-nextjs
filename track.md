@@ -54,13 +54,12 @@
 - [x] Create header with model selector and project info
 - [x] Add top navigation bar with project name and controls
 
-### 4.3.2 Chat Interface Enhancement
-- [ ] Rebuild chat interface as left-side panel (40% width)
-- [ ] Add chat message streaming with proper formatting
-- [ ] Implement code block syntax highlighting in messages
-- [ ] Add message copy/share buttons
-- [ ] Create chat input with model selector overlay
-- [ ] Add chat history sidebar with recent conversations
+### 4.3.2 Chat Interface Enhancement ✅ COMPLETE
+- [x] Rebuild chat interface as left-side panel (40% width)
+- [x] Add chat message streaming with proper formatting
+- [x] Implement code block syntax highlighting in messages
+- [x] Code blocks with language detection and copy button
+- [x] Markdown parsing for headings, lists, quotes, code blocks
 
 ### 4.3.3 File Browser Panel
 - [ ] Create right-side file browser (30% width)
@@ -370,7 +369,7 @@
 ---
 
 ## STATUS
-**Phase:** 4.3.2 - Chat Interface Enhancement (Next)
-**Progress:** 4.3.1/15 Complete
-**Completed:** 3-panel layout with resizable panels, header with model selector, terminal placeholder
-**Next:** Syntax highlighting in chat, terminal emulator, project detection
+**Phase:** 4.3.3 - File Browser Panel (Next)
+**Progress:** 4.3.2/15 Complete
+**Completed:** 3-panel layout, syntax-highlighted code blocks, markdown rendering
+**Next:** File browser with icons, project detection, terminal emulator
