@@ -427,3 +427,140 @@ export const dependencyQueries = {
     if (error) throw error;
   },
 };
+
+export const codeEntityQueries = {
+  async list(fileId: string) {
+    const { data, error } = await supabase
+      .from('code_entities')
+      .select('*')
+      .eq('file_id', fileId)
+      .order('start_line', { ascending: true });
+    if (error) throw error;
+    return data;
+  },
+
+  async create(fileId: string, entity: any) {
+    const { data, error } = await supabase
+      .from('code_entities')
+      .insert({
+        file_id: fileId,
+        name: entity.name,
+        entity_type: entity.type,
+        language: entity.language,
+        start_line: entity.startLine,
+        end_line: entity.endLine,
+        start_column: entity.startColumn,
+        end_column: entity.endColumn,
+        params: entity.params || [],
+        return_type: entity.returnType,
+        is_async: entity.isAsync || false,
+        is_exported: entity.isExported || false,
+        parent_class: entity.parentClass,
+        visibility: entity.visibility,
+      })
+      .select()
+      .single();
+    if (error) throw error;
+    return data;
+  },
+
+  async deleteByFile(fileId: string) {
+    const { error } = await supabase
+      .from('code_entities')
+      .delete()
+      .eq('file_id', fileId);
+    if (error) throw error;
+  },
+
+  async findByName(projectId: string, name: string) {
+    const { data, error } = await supabase
+      .from('code_entities')
+      .select('*, files!inner(project_id, path)')
+      .eq('name', name)
+      .eq('files.project_id', projectId);
+    if (error) throw error;
+    return data;
+  },
+
+  async findByType(fileId: string, entityType: string) {
+    const { data, error } = await supabase
+      .from('code_entities')
+      .select('*')
+      .eq('file_id', fileId)
+      .eq('entity_type', entityType);
+    if (error) throw error;
+    return data;
+  },
+};
+
+export const codeImportQueries = {
+  async list(fileId: string) {
+    const { data, error } = await supabase
+      .from('code_imports')
+      .select('*')
+      .eq('file_id', fileId)
+      .order('line', { ascending: true });
+    if (error) throw error;
+    return data;
+  },
+
+  async create(fileId: string, importInfo: any) {
+    const { data, error } = await supabase
+      .from('code_imports')
+      .insert({
+        file_id: fileId,
+        source: importInfo.source,
+        imports: importInfo.imports,
+        is_default: importInfo.isDefault || false,
+        is_namespace: importInfo.isNamespace || false,
+        line: importInfo.line,
+      })
+      .select()
+      .single();
+    if (error) throw error;
+    return data;
+  },
+
+  async deleteByFile(fileId: string) {
+    const { error } = await supabase
+      .from('code_imports')
+      .delete()
+      .eq('file_id', fileId);
+    if (error) throw error;
+  },
+};
+
+export const codeExportQueries = {
+  async list(fileId: string) {
+    const { data, error } = await supabase
+      .from('code_exports')
+      .select('*')
+      .eq('file_id', fileId)
+      .order('line', { ascending: true });
+    if (error) throw error;
+    return data;
+  },
+
+  async create(fileId: string, exportInfo: any) {
+    const { data, error } = await supabase
+      .from('code_exports')
+      .insert({
+        file_id: fileId,
+        name: exportInfo.name,
+        is_default: exportInfo.isDefault || false,
+        line: exportInfo.line,
+      })
+      .select()
+      .single();
+    if (error) throw error;
+    return data;
+  },
+
+  async deleteByFile(fileId: string) {
+    const { error } = await supabase
+      .from('code_exports')
+      .delete()
+      .eq('file_id', fileId);
+    if (error) throw error;
+  },
+};

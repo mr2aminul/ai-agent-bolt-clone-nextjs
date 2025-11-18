@@ -3,29 +3,18 @@
 ## COMPLETED ✅
 - **Phase 1-6**: Foundation, DB, LM Studio, UI, File Ops, Editor
 - **Phase 7.1**: DuckDuckGo search with caching
-- **Phase 7.2.1-7.2.4**: Parser services with AST analysis
-- **Phase 7.2.6**: API endpoint for code analysis
+- **Phase 7.2**: Code Parser & AST Analysis with DB storage
 
 ---
 
 ## PHASE 7: INTELLIGENT CODE UNDERSTANDING
 
-### 7.2 Code Parser & AST Analysis
-#### 7.2.1-7.2.4 Parser Services (DONE)
-- [x] @babel/parser, @babel/traverse for JS/TS
-- [x] php-parser for PHP
-- [x] lib/code-parser/ directory structure
-- [x] JS/TS parser: functions, classes, methods, imports, exports
-- [x] PHP parser: classes, methods, properties, interfaces, use statements
+### 7.2 Code Parser & AST Analysis (DONE)
+- [x] Parser services (JS/TS, PHP)
 - [x] AST traversal and entity extraction
-- [x] Function boundary identification
-
-#### 7.2.5 DB Storage (NEXT)
-- [ ] Migration: code_entities table
-- [ ] Store parsed data
-
-#### 7.2.6 API Endpoint (DONE)
-- [x] POST /api/code/analyze with stats
+- [x] DB migration: code_entities, code_imports, code_exports tables
+- [x] Query functions for code entities
+- [x] API endpoint with DB storage option
 
 ### 7.3 Cross-File Dependency Tracking
 - [ ] Build import/export graph
@@ -238,6 +227,6 @@ User: "Add birthday field to user profile"
 ---
 
 ## CURRENT STATUS
-**Phase:** 7.2.5 - DB Storage (NEXT)
-**Completed:** 7.2.1-7.2.4 - Parser services with AST analysis
-**Next:** Create code_entities table migration and storage
+**Phase:** 7.3 - Cross-File Dependency Tracking (NEXT)
+**Completed:** 7.2 - Code Parser & AST Analysis with DB storage
+**Next:** Build import/export graph and dependency tracking
