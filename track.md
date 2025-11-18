@@ -61,14 +61,15 @@
 - [x] Code blocks with language detection and copy button
 - [x] Markdown parsing for headings, lists, quotes, code blocks
 
-### 4.3.3 Project File Browser Panel
-- [ ] Create right-side file browser (30% width)
-- [ ] Implement file tree navigation with expand/collapse
-- [ ] Add file icons based on extension/type
-- [ ] Implement file preview/edit on click
-- [ ] Add file operations context menu (create/delete/rename)
-- [ ] Search and filter functionality
-- [ ] Breadcrumb navigation for current file path
+### 4.3.3 Project File Browser Panel ✅ COMPLETE
+- [x] Create right-side file browser (30% width)
+- [x] Implement file tree navigation with expand/collapse
+- [x] Add file icons based on extension/type
+- [x] Project selector with directory picker
+- [x] Project list and management
+- [x] Chat list and management
+- [x] File scanning and tree building
+- [x] Search and filter functionality
 
 ### 4.3.4 Terminal Panel
 - [ ] Implement bottom terminal panel (30% height)
@@ -369,7 +370,7 @@
 ---
 
 ## STATUS
-**Phase:** 4.3.3 - File Browser Panel (Next)
-**Progress:** 4.3.2/15 Complete
-**Completed:** 3-panel layout, syntax-highlighted code blocks, markdown rendering
-**Next:** File browser with icons, project detection, terminal emulator
+**Phase:** 4.3.4 - Terminal Panel (Next)
+**Progress:** 4.3.3/15 Complete
+**Completed:** Project/chat management, file browser with tree, directory picker
+**Next:** Terminal emulator, command execution, project type detection
