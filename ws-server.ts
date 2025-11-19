@@ -1,4 +1,4 @@
-//@api/chat/stream/route.ts
+// ws-server.ts
 import { WebSocketServer } from 'ws';
 import { lmStudioService, ChatMessage } from '@/lib/lm-studio/client';
 import { contextManager } from '@/lib/lm-studio/context-manager';
@@ -23,11 +23,15 @@ const wss = new WebSocketServer({ port: 1235 });
 wss.on('connection', (ws) => {
   console.log('Client connected');
 
-  let streaming = false;
+  let streaming = false; // prevent concurrent streams per client
 
   ws.on('message', async (msg) => {
-    if (streaming) return;
+    if (streaming) {
+      ws.send(JSON.stringify({ error: 'Already streaming a message. Please wait.' }));
+      return;
+    }
 
+    streaming = true;
     try {
       const data: WSRequest = JSON.parse(msg.toString());
       const {
@@ -43,6 +47,7 @@ wss.on('connection', (ws) => {
 
       if (!messages || !modelPath) {
         ws.send(JSON.stringify({ error: 'Missing messages or modelPath' }));
+        streaming = false;
         return;
       }
 
@@ -54,9 +59,7 @@ wss.on('connection', (ws) => {
         fileContextPaths: contextConfig?.fileContextPaths,
       });
 
-      streaming = true;
       let accumulated = '';
-
       for await (const chunk of lmStudioService.streamChat(modelPath, contextMessages, {
         maxTokens,
         temperature,
@@ -68,10 +71,10 @@ wss.on('connection', (ws) => {
       }
 
       ws.send(JSON.stringify({ done: true }));
-      streaming = false;
     } catch (err) {
       console.error('WebSocket error:', err);
       ws.send(JSON.stringify({ error: 'Failed to generate response' }));
+    } finally {
       streaming = false;
     }
   });
